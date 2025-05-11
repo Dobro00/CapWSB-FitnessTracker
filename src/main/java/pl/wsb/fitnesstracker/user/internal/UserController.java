@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -21,7 +22,17 @@ class UserController {
                 .map(userMapper::toDto)
                 .toList();
     }
-
+    @GetMapping("/simple")
+    public List<UserSimpleDto> getAllUsersSimple(){
+        return userService.findAllUsers()
+                .stream()
+                .map(userMapper::toSimpleDto)
+                .toList();
+    }
+    @GetMapping("/{id}")
+    public Optional<UserDto> getUserbyID(@PathVariable  Long id){
+        return userService.getUser(id);
+    }
     @PostMapping
     public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
 

@@ -16,6 +16,7 @@ import java.util.Optional;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public User createUser(final User user) {
@@ -27,8 +28,8 @@ class UserServiceImpl implements UserService, UserProvider {
     }
 
     @Override
-    public Optional<User> getUser(final Long userId) {
-        return userRepository.findById(userId);
+    public Optional<UserDto> getUser(final Long userId) {
+        return userRepository.findById(userId).map(userMapper::toDto);
     }
 
     @Override
