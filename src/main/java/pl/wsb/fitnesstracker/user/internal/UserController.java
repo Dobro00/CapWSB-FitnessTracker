@@ -50,4 +50,9 @@ class UserController {
         userService.deleteUserById(userId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/email")
+    public List<UserEmailDto> getUserByEmail(@RequestParam String email) {
+        return userService.getUserByEmail(email);
+    }
 }
