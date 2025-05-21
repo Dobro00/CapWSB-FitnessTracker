@@ -39,10 +39,12 @@ class UserController {
 
         User user = userMapper.toEntity(userDto);
         userService.createUser(user);
-        // TODO: Implement the method to add a new user.
-        //  You can use the @RequestBody annotation to map the request body to the UserDto object.
-
 
         return null;
+    }
+
+    @DeleteMapping("/{Id}")
+    public void deleteUser(@PathVariable Long Id) {
+        userService.deleteUserById(Id);
     }
 }
