@@ -1,6 +1,8 @@
 package pl.wsb.fitnesstracker.user.internal;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.wsb.fitnesstracker.user.api.User;
 
@@ -34,17 +36,18 @@ class UserController {
     public Optional<UserDto> getUserbyID(@PathVariable  Long id){
         return userService.getUser(id);
     }
-    @PostMapping("/addUser")
-    public UserDto addUser(@RequestBody UserDto userDto) throws InterruptedException {
+    @PostMapping
+    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) throws InterruptedException {
 
         User user = userMapper.toEntity(userDto);
         userService.createUser(user);
 
-        return null;
+        return ResponseEntity.status(HttpStatus.CREATED).body(userDto);
     }
 
-    @DeleteMapping("/{Id}")
-    public void deleteUser(@PathVariable Long Id) {
-        userService.deleteUserById(Id);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
+        userService.deleteUserById(userId);
+        return ResponseEntity.noContent().build();
     }
 }
