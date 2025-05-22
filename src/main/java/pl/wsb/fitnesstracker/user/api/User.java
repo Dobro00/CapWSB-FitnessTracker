@@ -2,10 +2,7 @@ package pl.wsb.fitnesstracker.user.api;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import pl.wsb.fitnesstracker.training.api.Training;
 
 import java.time.LocalDate;
@@ -14,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class User {
@@ -49,6 +47,5 @@ public class User {
         this.birthdate = birthdate;
         this.email = email;
     }
-
 }
 

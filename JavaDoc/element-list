@@ -1,0 +1,10 @@
+pl.wsb
+pl.wsb.fitnesstracker.exception.api
+pl.wsb.fitnesstracker.livecoding.bean
+pl.wsb.fitnesstracker.livecoding.ioc
+pl.wsb.fitnesstracker.mail.api
+pl.wsb.fitnesstracker.statistics.api
+pl.wsb.fitnesstracker.training.api
+pl.wsb.fitnesstracker.training.internal
+pl.wsb.fitnesstracker.user.api
+pl.wsb.fitnesstracker.user.internal

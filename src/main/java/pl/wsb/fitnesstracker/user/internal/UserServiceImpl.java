@@ -33,7 +33,6 @@ class UserServiceImpl implements UserService, UserProvider {
         return userRepository.findById(userId).map(userMapper::toDto);
     }
 
-//    @Override
     public List<UserEmailDto> getUserByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
@@ -46,8 +45,18 @@ class UserServiceImpl implements UserService, UserProvider {
     @Override
     public void deleteUserById(final Long userId) { userRepository.deleteById(userId);}
 
-//    @Override
     public List<User> getOlderUsers(final LocalDate time) {
         return userRepository.getOlderUsers(time);
+    }
+
+    public void updateUser(final Long userId, final UserDto updateUser) {
+        Optional<User> user = userRepository.findById(userId);
+        user.ifPresent(u -> {
+            u.setFirstName(updateUser.firstName());
+            u.setLastName(updateUser.lastName());
+            u.setEmail(updateUser.email());
+            u.setBirthdate(updateUser.birthdate());
+            userRepository.save(u);
+        });
     }
 }

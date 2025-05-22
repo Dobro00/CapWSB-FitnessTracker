@@ -40,6 +40,10 @@ class UserController {
                 .map(userMapper::toDto)
                 .toList();
     }
+    @PutMapping("/{id}")
+    public void updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        userService.updateUser(id, userDto);
+    }
     @GetMapping("/{id}")
     public Optional<UserDto> getUserbyID(@PathVariable  Long id){
         return userService.getUser(id);
