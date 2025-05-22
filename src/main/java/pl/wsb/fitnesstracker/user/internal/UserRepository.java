@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,4 +21,7 @@ interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT new pl.wsb.fitnesstracker.user.internal.UserEmailDto(u.id, u.email) FROM User u WHERE lower(u.email) LIKE lower(concat('%', :fragment, '%'))")
     List<UserEmailDto> findByEmail(String fragment);
+
+    @Query("SELECT u FROM User u WHERE u.birthdate < :time")
+    List<User> getOlderUsers(LocalDate time);
 }

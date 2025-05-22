@@ -7,6 +7,7 @@ import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserProvider;
 import pl.wsb.fitnesstracker.user.api.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,4 +45,9 @@ class UserServiceImpl implements UserService, UserProvider {
 
     @Override
     public void deleteUserById(final Long userId) { userRepository.deleteById(userId);}
+
+//    @Override
+    public List<User> getOlderUsers(final LocalDate time) {
+        return userRepository.getOlderUsers(time);
+    }
 }

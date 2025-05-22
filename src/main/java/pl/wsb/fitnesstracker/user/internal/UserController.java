@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.wsb.fitnesstracker.user.api.User;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,13 @@ class UserController {
         return userService.findAllUsers()
                 .stream()
                 .map(userMapper::toSimpleDto)
+                .toList();
+    }
+    @GetMapping("/older/{time}")
+    public  List<UserDto> getOlderUsers(@PathVariable LocalDate time){
+        return userService.getOlderUsers(time)
+                .stream()
+                .map(userMapper::toDto)
                 .toList();
     }
     @GetMapping("/{id}")
