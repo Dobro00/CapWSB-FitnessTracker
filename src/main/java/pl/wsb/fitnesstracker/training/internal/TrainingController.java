@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/trainings")
@@ -62,5 +63,13 @@ class TrainingController {
         TrainingDto responseDto = trainingMapper.toDto(createdTraining);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+    }
+
+    @PutMapping("{trainingId}")
+    public ResponseEntity<TrainingDto> updateTraining (@PathVariable Long trainingId, @RequestBody TrainingSimpleDto trainingSimpleDto) {
+        Optional<Training> updatedTraining = trainingsService.updateTraining(trainingId, trainingSimpleDto);
+        TrainingDto responseDto = trainingMapper.toDto(updatedTraining.get());
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
 }

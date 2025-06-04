@@ -51,4 +51,18 @@ public class TrainingServiceImpl implements TrainingProvider, TrainingService {
         Training training = trainingMapper.toEntity(trainingSimpleDto, user);
         return trainingRepository.save(training);
     }
+
+    public Optional<Training> updateTraining(final Long trainingId, final TrainingSimpleDto trainingSimpleDto) {
+        Optional<Training> training = trainingRepository.findById(trainingId);
+        training.ifPresent(t -> {
+            t.setStartTime(trainingSimpleDto.getStartTime());
+            t.setEndTime(trainingSimpleDto.getEndTime());
+            t.setActivityType(trainingSimpleDto.getActivityType());
+            t.setAverageSpeed(trainingSimpleDto.getAverageSpeed());
+            t.setDistance(trainingSimpleDto.getDistance());
+            t.setUser(userRepository.findById(trainingSimpleDto.getUserId()).orElse(null));
+            trainingRepository.save(t);
+        });
+        return training;
+    }
 }
