@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 import pl.wsb.fitnesstracker.user.api.User;
 
 @Component
-class UserMapper {
+public class UserMapper {
 
-    UserDto toDto(User user) {
+    public UserDto toDto(User user) {
         return new UserDto(user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
