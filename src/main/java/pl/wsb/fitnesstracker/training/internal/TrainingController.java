@@ -1,10 +1,13 @@
 package pl.wsb.fitnesstracker.training.internal;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import pl.wsb.fitnesstracker.training.api.Training;
+import pl.wsb.fitnesstracker.training.api.TrainingDto;
+import pl.wsb.fitnesstracker.training.api.TrainingSimpleDto;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -27,5 +30,37 @@ class TrainingController {
                 .stream()
                 .map(trainingMapper::toDto)
                 .toList();
+    }
+
+    @GetMapping()
+    public List<TrainingDto> getAllTrainings(){
+        return trainingsService.getAllTrainings()
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("{userId}")
+    public List<TrainingDto> getTraining(@PathVariable Long userId){
+        return trainingsService.getTrainingsForUser(userId)
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/activityType")
+    public List<TrainingDto> getTrainingsByActivityType(@RequestParam ActivityType activityType){
+        return trainingsService.getAllTrainingsByActivityType(activityType)
+                .stream()
+                .map(trainingMapper::toDto)
+                .toList();
+    }
+
+    @PostMapping
+    public ResponseEntity<TrainingDto> addTraining (@RequestBody TrainingSimpleDto trainingSimpleDto) {
+        Training createdTraining = trainingsService.createTraining(trainingSimpleDto);
+        TrainingDto responseDto = trainingMapper.toDto(createdTraining);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 }

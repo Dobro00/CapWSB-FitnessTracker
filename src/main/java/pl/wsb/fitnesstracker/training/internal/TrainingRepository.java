@@ -12,4 +12,10 @@ interface TrainingRepository extends JpaRepository<Training, Long> {
 
     @Query("SELECT t FROM Training t WHERE t.endTime > :time")
     List<Training> getFinishedTrainings(Date time);
+
+    @Query("SELECT t FROM Training t WHERE t.user.id = :userId")
+    List<Training> findAllById(Long userId);
+
+    @Query("SELECT t FROM Training t WHERE t.activityType = :activityType")
+    List<Training> getAllTrainingsByActivityType(ActivityType activityType);
 }
