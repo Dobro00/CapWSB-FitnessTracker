@@ -13,7 +13,7 @@ public interface UserProvider {
      * @param userId id of the user to be searched
      * @return An {@link Optional} containing the located user, or {@link Optional#empty()} if not found
      */
-    Optional<pl.wsb.fitnesstracker.user.internal.UserDto> getUser(Long userId);
+    Optional<UserDto> getUser(Long userId);
 
     /**
      * Retrieves all users.

@@ -3,13 +3,13 @@ package pl.wsb.fitnesstracker.user.internal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.wsb.fitnesstracker.user.api.User;
-import pl.wsb.fitnesstracker.user.api.UserProvider;
-import pl.wsb.fitnesstracker.user.api.UserService;
+import pl.wsb.fitnesstracker.user.api.*;
+
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
